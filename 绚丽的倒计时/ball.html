@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>小球碰撞检测</title>
+<style>
+#canvas{
+  display: block;
+  margin: 50px auto;
+  border: 1px solid #0088cc;
+  }
+</style>
+</head>
+<body>
+	<canvas id="canvas">如果不支持，我会显示</canvas>
+    <script type="text/javascript">
+    	var ball = {x:512 , y:50 , r:20 , g:2 ,vx:4, vy:-10,color:"#005588"};
+    	window.onload = function(){
+    		var canvas = document.getElementById("canvas");
+    		canvas.width = 1024;
+    		canvas.height = 500;
+			var cantext = canvas.getContext("2d");
+
+			setInterval(function(){
+				render(cantext);
+				update();
+			}, 50);
+
+		function update(){
+			//下落
+			ball.x += ball.vx;//x = vx*t
+			ball.y += ball.vy;//y = vy*t
+			ball.vy += ball.g;//vy = g*t
+
+			//下边碰撞
+			if(ball.y >= 500 -ball.r){
+			ball.y = 500 -ball.r
+			ball.vy = -ball.vy*0.9
+			}
+			//右边碰撞
+			if(ball.x >= 1024 -ball.r){
+			ball.x = 1024 -ball.r
+			ball.vx = -ball.vx*0.9
+			}
+			//左边碰撞
+			if(ball.x <= ball.r){
+			ball.x = ball.r
+			ball.vx = -ball.vx*0.9
+			}
+		}
+
+		function render(cxt){
+			cxt.clearRect(0,0,cxt.canvas.width,cxt.canvas.height);
+			
+			cxt.fillStyle=ball.color;
+			cxt.beginPath();
+			cxt.arc(ball.x,ball.y,ball.r,0,2*Math.PI);
+			cxt.closePath();
+			cxt.fill();
+		}
+
+    	}
+    </script>
+</body>
+</html>

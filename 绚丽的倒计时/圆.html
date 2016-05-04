@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>多个弧-练习2</title>
+<style>
+#canvas{
+    border:1px solid #aaa;
+    display: block;
+    margin: 50px auto;
+  }
+</style>
+</head>
+<body>
+  <canvas id="canvas" width="1024" height="768">如果不支持，我会显示</canvas>
+  <script type="text/javascript">
+    window.onload = function(){
+      var canvas = document.getElementById("canvas");
+      // canvas.width = 1024;
+      // canvas.height = 768;
+      // 用context进行绘制
+      var context = canvas.getContext("2d");
+
+        context.arc(300,550,200,0,0.5*Math.PI,true);
+        context.strokeStyle="#0088cc"
+        context.stroke();
+
+      for(var i=0;i<10;i++){
+        context.beginPath();
+        context.arc(50+i*100,60,40,0,2*Math.PI*(i+1)/10);
+        context.closePath();
+        context.stroke();
+      }
+
+       for(var i=0;i<10;i++){
+        context.beginPath();
+        context.arc(50+i*100,180,40,0,2*Math.PI*(i+1)/10);
+        context.stroke();
+      }
+
+       for(var i=0;i<10;i++){
+        context.beginPath();
+        context.arc(50+i*100,300,40,0,2*Math.PI*(i+1)/10);
+        context.fillStyle='#0088cc';
+        context.fill();
+      }
+      
+    }
+  </script>
+</body>
+</html>
